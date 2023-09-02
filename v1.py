@@ -11,7 +11,6 @@ db_config = {
     "user": "root",
     "password": "vatsal"
 }
-#"C:\Users\krish\OneDrive\Pictures\Camera Roll\WIN_20230808_16_35_56_Pro.jpg"
 
 def create_database(connection, database_name):
     cursor = connection.cursor()
