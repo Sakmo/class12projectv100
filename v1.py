@@ -100,10 +100,14 @@ def display_records(connection, table_name):
             print("Name:", record[1])
             print("Late Count:", record[2])
             print("Photo Data:", record[3])
-            image = mpimg.imread(record[3])
-            plt.imshow(image)
-            plt.show()
-            print("=" * 30)
+            try:
+                image = mpimg.imread(record[3])
+                plt.imshow(image)
+                plt.show()
+            except:
+                print('Invalid Image')
+            finally:
+                print("=" * 30)
         if len(records)==0:
             print('No records found')
         cursor.close()
