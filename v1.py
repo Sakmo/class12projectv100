@@ -65,9 +65,8 @@ def delete_record(connection, table_name):
     
     cursor.close()
 
-def display_records(connection, table_name):
+def display_records(connection, table_name, choice):
     cursor = connection.cursor()
-    choice = input('Enter clause:\n admno')   # 1) <40, 2) >50, 3)=90, 4)all, 5) scan
     if choice[0] in '<>':
         select_query = f"SELECT * FROM {table_name} where admno {choice}"
         cursor.execute(select_query)
@@ -156,7 +155,8 @@ def main():
         elif choice == 2:
             delete_record(connection, table_name)
         elif choice == 3:
-            display_records(connection, table_name)
+            choice = input('Enter clause:\n admno')   # 1) <40, 2) >50, 3)=90, 4)all, 5) scan
+            display_records(connection, table_name, choice)
         elif choice == 4:
             break
         else:
