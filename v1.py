@@ -2,9 +2,7 @@ import mysql.connector
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import barcode
-import warnings
 
-warnings.filterwarnings('ignore')
 
 db_config = {
     "host": "localhost",
@@ -117,7 +115,10 @@ def display_records(connection, table_name, choice):
 def report(connection, table_name):
     admno = barcode.scan()
     if admno == None:
-        admno = int(input("Enter Admno: "))
+        try:
+            admno = int(input("Enter Admno: "))
+        except:
+            print('Invalid admno')
     
     cursor = connection.cursor()
     select_query = f"SELECT admno FROM {table_name}"
@@ -125,10 +126,12 @@ def report(connection, table_name):
     valid_admno_list = [record[0] for record in cursor.fetchall()]
     
     if admno in valid_admno_list:
+        cursor.execute(f"SELECT late_count FROM {table_name} where admno = {admno}")
+        count_init = cursor.fetchall()[0][0]
         query = f"UPDATE {table_name} SET late_count = late_count + 1 where admno = {admno}"
-        cursor.execute(query, (admno,))
+        cursor.execute(query)
         connection.commit()
-        print("Reported successfully!")
+        print(f"Reported successfully! \nCount: {count_init} ----> {count_init+1}")
     else:
         print("Invalid admno")
     
