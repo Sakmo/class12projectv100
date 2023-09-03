@@ -118,7 +118,7 @@ def report(connection, table_name):
         try:
             admno = int(input("Enter Admno: "))
         except:
-            print('Invalid admno')
+            pass
     
     cursor = connection.cursor()
     select_query = f"SELECT admno FROM {table_name}"

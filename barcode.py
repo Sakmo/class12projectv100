@@ -3,9 +3,10 @@
 import cv2
 from pyzbar import pyzbar
 import warnings
+warnings.filterwarnings('always')
 
 def read_barcodes_for_each_frame(frame):
-    warnings.filterwarnings('ignore')
+    warnings.filterwarnings('always')
     barcodes_in_frame = pyzbar.decode(frame) #returns empty list if no barcodes found
     s = 0
     for barcode in barcodes_in_frame: #wont run if no barcodes found
