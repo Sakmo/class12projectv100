@@ -135,10 +135,12 @@ def report(connection, table_name, adm_num):
     if admno in valid_admno_list:
         cursor.execute(f"SELECT late_count FROM {table_name} where admno = {admno}")
         count_init = cursor.fetchall()[0][0]
+        cursor.execute(f"SELECT name FROM {table_name} where admno = {admno}")
+        name = cursor.fetchall()[0][0]
         query = f"UPDATE {table_name} SET late_count = late_count + 1 where admno = {admno}"
         cursor.execute(query)
         connection.commit()
-        messagebox.showinfo("Latecomer Reported", f"Count: {count_init} ----> {count_init+1}")
+        messagebox.showinfo(f"{admno}-{name} Reported", f"Count: {count_init} ----> {count_init+1}")
     else:
         messagebox.showinfo("Admission Number not found", "Admission Number not found")
     
