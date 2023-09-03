@@ -116,7 +116,7 @@ def display_records(connection, table_name, choice):
 
 
 def report(connection, table_name, adm_num):
-
+    
     # admno = barcode.scan()
     admno = adm_num
     if admno == None:
@@ -140,7 +140,7 @@ def report(connection, table_name, adm_num):
         query = f"UPDATE {table_name} SET late_count = late_count + 1 where admno = {admno}"
         cursor.execute(query)
         connection.commit()
-        messagebox.showinfo(f"{admno}-{name} Reported", f"Count: {count_init} ----> {count_init+1}")
+        messagebox.showinfo("Latecomer Reported", f"{admno}-{name} Reported\nCount: {count_init} ----> {count_init+1}")
     else:
         messagebox.showinfo("Admission Number not found", "Admission Number not found")
     
@@ -241,10 +241,11 @@ def main():
                 adm_num = None
                 report(connection, table_name, adm_num)
             else:
-                adm_num = int(a.get())
-                report(connection, table_name, adm_num)
-
-
+                try:
+                    adm_num = int(a.get())
+                    report(connection, table_name, adm_num)
+                except:
+                    messagebox.showinfo("Invalid Input", "Please try again")
             page4.destroy()
         
         submit_button = tk.Button(page4, text="Report", command=report_latecomer)
@@ -272,5 +273,3 @@ def main():
     connection.close()
 
 main()
-    
-
