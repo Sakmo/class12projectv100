@@ -8,7 +8,11 @@ def read_barcodes_for_each_frame(frame):
     s = 0
     for barcode in barcodes_in_frame: #wont run if no barcodes found
         barcode_info = barcode.data.decode('utf-8')
-        s = int(barcode_info[-3:])
+        try:
+            s = int(barcode_info[-3:])
+        except:
+            print('Invalid Barcode, enter manually:')
+            return None, frame
     return s,frame
 
 def scan():
@@ -18,7 +22,7 @@ def scan():
     while ret and s==0:
         ret, frame = camera.read()
         s, frame_with_barcode = read_barcodes_for_each_frame(frame)
-        cv2.imshow('Scan the ID card here (ESC to stop)', frame_with_barcode)
+        cv2.imshow('ID Card Scanner (Press ESC to enter manually)', frame_with_barcode)
         if cv2.waitKey(1)==27:  #27 is the cv2 order of escape key
             break
     camera.release()

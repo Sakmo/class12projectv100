@@ -115,7 +115,9 @@ def display_records(connection, table_name, choice):
 
 
 def report(connection, table_name):
-    admno = int(input("Enter Admno: "))
+    admno = barcode.scan()
+    if admno == None:
+        admno = int(input("Enter Admno: "))
     
     cursor = connection.cursor()
     select_query = f"SELECT admno FROM {table_name}"
@@ -147,17 +149,20 @@ def main():
         print("1. Add Record")
         print("2. Delete Record")
         print("3. Display Records")
-        print("4. Exit")
-        choice = int(input("Enter your choice: "))
+        print("4. Report Latecomer")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
 
-        if choice == 1:
+        if choice == '1':
             add_record(connection, table_name)
-        elif choice == 2:
+        elif choice == '2':
             delete_record(connection, table_name)
-        elif choice == 3:
-            choice = input('Enter clause:\n admno')   # 1) <40, 2) >50, 3)=90, 4)all, 5) scan
+        elif choice == '3':
+            choice = input('Enter clause (<, >, =, all, scan):\n admno ')   # 1) <40, 2) >50, 3)=90, 4)all, 5) scan
             display_records(connection, table_name, choice)
-        elif choice == 4:
+        elif choice == '4':
+            report(connection, table_name)
+        elif choice == '5':
             break
         else:
             print("Invalid choice. Please choose a valid option.")
