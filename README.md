@@ -7,7 +7,7 @@ Most of the pictures in pfp folder were taken from https://github.com/NVlabs/ffh
 
 ### How To Run
 ```
-python -m pip install -U python-opencv pyzbar warnings mysql-connector matplotlib barcode python-dotenv
+python -m pip install -U opencv-python pyzbar warnings mysql-connector matplotlib barcode python-dotenv
 ```
 ```
 example .env file
