@@ -9,7 +9,12 @@ Most of the pictures in pfp folder were taken from https://github.com/NVlabs/ffh
 ```
 python -m pip install -U python-opencv pyzbar warnings mysql-connector matplotlib barcode python-dotenv
 ```
-
+```
+example .env file
+SQL_HOST = "localhost"
+SQL_USER = "root"
+SQL_PASS = "root"
+```
 ```
 py src.py
 ```

@@ -4,12 +4,14 @@ import matplotlib.image as mpimg
 import barcode
 import tkinter as tk
 from tkinter import messagebox
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root"
+    "host": os.getenv("SQL_HOST"),
+    "user": os.getenv("SQL_USER"),
+    "password": os.getenv("SQL_PASS")
 }
 
 def create_database(connection, database_name):
