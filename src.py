@@ -155,13 +155,11 @@ def main():
     create_table(connection, table_name)
 
 
-    # Function to handle the "Add Record" button
     def open_add_record():
         page1 = tk.Toplevel(root)
         page1.title("Add Record")
         page1.geometry("400x400")
         
-        # Add content and widgets for adding a record
         tk.Label(page1, text="Add a New Record", font=("Helvetica", 18, "bold")).pack(pady=10)
         tk.Label(page1, text="Name:").pack()
         name_entry = tk.Entry(page1)
@@ -185,7 +183,6 @@ def main():
         submit_button = tk.Button(page1, text="Submit", command=submit_record)
         submit_button.pack(pady=10)
 
-    # Function to handle the "Delete Record" button
     def open_delete_record():
         page2 = tk.Toplevel(root)
         page2.title("Delete Record")
@@ -199,7 +196,6 @@ def main():
         def del_record():
             admno = int(id_entry.get())
             err = delete_record(admno, connection, table_name)
-            # You can handle the record deletion logic here
             if err:
                 messagebox.showinfo("No record found", "Invalid Admission Number")
             else:
@@ -210,13 +206,11 @@ def main():
         submit_button = tk.Button(page2, text="Delete", command=del_record)
         submit_button.pack(pady=10)
 
-    # Function to handle the "Display Records" button
     def open_display_records():
         page3 = tk.Toplevel(root)
         page3.title("Display Records")
         page3.geometry("400x400")
         
-        # Add content and widgets for displaying records
         tk.Label(page3, text="Display Records", font=("Helvetica", 18, "bold")).pack(pady=10)
         tk.Label(page3, text="Enter Your Query WHERE admno").pack()
         q = tk.Entry(page3)
@@ -230,13 +224,11 @@ def main():
         submit_button = tk.Button(page3, text="Display", command=show_recs)
         submit_button.pack(pady=10)
 
-    # Function to handle the "Report Latecomer" button
     def open_report_latecomer():
         page4 = tk.Toplevel(root)
         page4.title("Report Latecomer")
         page4.geometry("400x400")
         
-        # Add content and widgets for reporting a latecomer
         tk.Label(page4, text="Report Latecomer", font=("Helvetica", 18, "bold")).pack(pady=10)
         tk.Label(page4, text="Admission Number of Latecomer (leave empty to scan)").pack()
         a = tk.Entry(page4)
@@ -256,12 +248,10 @@ def main():
         submit_button = tk.Button(page4, text="Report", command=report_latecomer)
         submit_button.pack(pady=10)
 
-    # Main window
     root = tk.Tk()
     root.title("Record Management System")
     root.geometry("600x600")
 
-    # Create and place buttons for different actions
     tk.Label(root, text="Student Latecomer Database", font=("Helvetica", 24, "bold")).pack(pady=20)
     add_button = tk.Button(root, text="Add Record", command=open_add_record, font=("Helvetica", 12, "bold"))
     delete_button = tk.Button(root, text="Delete Record", command=open_delete_record, font=("Helvetica", 12, "bold"))
